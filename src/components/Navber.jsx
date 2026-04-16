@@ -5,7 +5,9 @@ const Navber = () => {
 
     const links =<>
         <li className='font-semibold'><NavLink to='/'>Home</NavLink></li>
-        <li className='font-semibold active:outline-1'><NavLink to='/addCar'>Add-Car</NavLink></li>
+        <li className='font-semibold '><NavLink to='/addCar'>Add-Car</NavLink></li>
+        <li className='font-semibold '><NavLink to='/login'>Login</NavLink></li>
+        <li className='font-semibold '><NavLink to='/register'>Register</NavLink></li>
         
     </>
 
