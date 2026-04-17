@@ -32,6 +32,7 @@ const Login = () => {
         signInWithEmailPassword(email,password)
         .then(result =>{
             console.log("login successful",result.user);
+            e.target.reset();
              Swal.fire({
                     icon: "success",
                     title: "Login Successful!",
@@ -41,7 +42,12 @@ const Login = () => {
             
         })
         .catch(error =>{
-            console.log(error.message);
+                   Swal.fire({
+                   icon: "error",
+                   title: "Oops...",
+                   text: `${error.message}`,
+                  
+                 });
         })
 
     }

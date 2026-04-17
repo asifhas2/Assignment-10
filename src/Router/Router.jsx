@@ -7,6 +7,8 @@ import MyListing from "../Pages/MyListing";
 import MyBooking from "../Pages/MyBooking";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import PrivateRoute from "./PrivateRoute";
+import BrowseCars from "../Pages/BrowseCars";
 
 const router = createBrowserRouter([
   {
@@ -19,15 +21,19 @@ const router = createBrowserRouter([
         },
         {
             path:'/addCar',
-            element:<AddCart></AddCart>
+            element:<PrivateRoute><AddCart></AddCart></PrivateRoute>
         },
         {
             path:'/myListing',
-            element:<MyListing></MyListing>
+            element:<PrivateRoute><MyListing></MyListing></PrivateRoute>
         },
         {
             path:'/myBooking',
-            element:<MyBooking></MyBooking>
+            element:<PrivateRoute><MyBooking></MyBooking></PrivateRoute>
+        },
+        {
+            path:'/browsCars',
+            element:<BrowseCars></BrowseCars>
         },
         {
             path:'/login',

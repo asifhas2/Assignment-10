@@ -4,7 +4,7 @@ import AuthContext from "../Provider/AuthContext";
 import Swal from "sweetalert2";
 
 const Register = () => {
-  const { createUserGoogle, createUserWithEmailPassword, setError, error } =
+  const { createUserGoogle, createUserWithEmailPassword, setError, error,updateUserProfile } =
     use(AuthContext);
 
   const handelSignInWithGoogle = () => {
@@ -43,12 +43,14 @@ const Register = () => {
     createUserWithEmailPassword(email, password)
       .then((result) => {
         console.log(result.user);
+        updateUserProfile(name,photo);
         Swal.fire({
-          title: "Login Successful!",
+          title: "Register Successful!",
           timer: 2000,
           text: "You clicked the button!",
           icon: "success",
         });
+        e.target.reset();
       })
       .catch((error) => {
         Swal.fire({
