@@ -9,6 +9,7 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import PrivateRoute from "./PrivateRoute";
 import BrowseCars from "../Pages/BrowseCars";
+import CarDetails from "../Pages/carDetails";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
     children: [
         {
           index:true,
+          loader:()=>fetch('http://localhost:3000/newestCars'),
           Component:Home,  
         },
         {
@@ -30,6 +32,11 @@ const router = createBrowserRouter([
         {
             path:'/myBooking',
             element:<PrivateRoute><MyBooking></MyBooking></PrivateRoute>
+        },
+        {
+            path:'/details/:id',
+            loader:()=>fetch('http://localhost:3000/cars'),
+            element:<PrivateRoute><CarDetails></CarDetails></PrivateRoute>
         },
         {
             path:'/browsCars',

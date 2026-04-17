@@ -1,38 +1,39 @@
 import React from 'react';
+import { Link } from 'react-router';
 
-const Card = () => {
+const Card = ({data}) => {
     return (
-        <div class="max-w-sm bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden p-3 ">
+        <div class=" bg-white rounded-2xl  hover:shadow-xl transition duration-300 overflow-hidden p-3 ">
   
   <img  className=''
-    src="https://static.vecteezy.com/system/resources/thumbnails/053/733/179/small/every-detail-of-a-sleek-modern-car-captured-in-close-up-photo.jpg" 
+    src={data.image} 
     alt="Car Image"
     class="w-full h-48 object-cover"
   />
   <div class="p-4 space-y-2">
     <h2 class="text-xl font-bold text-gray-800">
-      Toyota Corolla
+      {data.carName}
     </h2>
 
    
     <p class="text-lg text-green-600 font-semibold">
-      $3500 / day
+      ${data.rentPricePerDay} / day
     </p>
     <p class="text-gray-600">
-      <span class="font-medium">Type:</span> Sedan
+      <span class="font-medium">Type:</span>{data.category}
     </p>
 
    
     <p class="text-gray-600">
-      <span class="font-medium">Provider:</span> ABC Rentals
+      <span class="font-medium">Provider:</span>{data.providerName}
     </p>
 
    
-    <a 
+    <Link to={`/details/${data._id}`} 
       class="block text-center mt-3 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition"
     >
       View Details
-    </a>
+    </Link>
 
   </div>
 </div>

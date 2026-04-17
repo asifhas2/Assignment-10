@@ -2,13 +2,18 @@ import React from "react";
 import Slider from "../components/Slider";
 import Card from "../components/Card";
 import TopRatedCars from "../components/TopRatedCar";
+import { data, useLoaderData } from "react-router";
 
 const Home = () => {
+    const carsData = useLoaderData();
+    
   return (
-    <div>
+    <div className="pt-10 bg-base-200">
       <Slider></Slider>
-      <div>
-        <Card></Card>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+        {
+            carsData.map(data => <Card data={data}></Card>)
+        }
       </div>
       <div>
         <section class="py-12 bg-gray-100">
