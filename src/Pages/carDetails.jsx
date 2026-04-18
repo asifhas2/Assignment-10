@@ -25,6 +25,7 @@ const handleBooking = async (car) => {
   const bookingData = {
     carId: car._id,
     carName: car.carName,
+    carImage:car.image,
     price: car.rentPricePerDay,
     userEmail: user?.email,
     userName: user?.displayName,
