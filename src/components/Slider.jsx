@@ -2,10 +2,10 @@ import React from 'react';
 
 const Slider = () => {
     return (
-         <div className="carousel  h-[250px] md:h-[300px] lg:h-[350px]  overflow-hidden"> 
+         <div className="carousel   h-[250px] md:h-[300px] lg:h-[350px]  overflow-hidden"> 
 
       {/* Slide 1 */}
-      <div id="slide1" className="carousel-item relative w-full ">
+      <div id="slide1" className="carousel-item pt-10  relative w-full ">
         <img className='w-[100%]'
           src="https://static.vecteezy.com/system/resources/previews/047/462/120/non_2x/dark-purple-gradient-elegant-background-vector.jpg"
         />

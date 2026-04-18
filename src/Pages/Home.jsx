@@ -1,19 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "../components/Slider";
 import Card from "../components/Card";
 import TopRatedCars from "../components/TopRatedCar";
 import { data, useLoaderData } from "react-router";
 
 const Home = () => {
-    const carsData = useLoaderData();
-    
+  const carsData = useLoaderData();
+  const [topCar, setTopCar] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/topCars")
+      .then((res) => res.json())
+      .then((data) => setTopCar(data));
+  }, []);
+
+  console.log(topCar);
+
   return (
     <div className="pt-10 bg-base-200">
       <Slider></Slider>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
-        {
-            carsData.map(data => <Card data={data}></Card>)
-        }
+        {carsData.map((data) => (
+          <Card data={data}></Card>
+        ))}
       </div>
       <div>
         <section class="py-12 bg-gray-100">
@@ -68,81 +77,41 @@ const Home = () => {
       </div>
       <div>
         <section class="py-16  to-gray-900 text-white">
-  <div class="max-w-7xl mx-auto px-5">
+          <div class="max-w-7xl mx-auto px-5">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-black">
+              Top Rated Cars
+            </h2>
 
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-black">
-      Top Rated Cars
-    </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {topCar.map((data) => (
+                <div class="group backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition duration-500">
+                  <img
+                    src={data.image}
+                    class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
+                  />
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <div class="p-5">
+                    <h3 class="text-xl text-black font-semibold">
+                      Tesla Model S
+                    </h3>
+                    <p class="text-sm text-black">{data.category}</p>
 
-      <div class="group backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition duration-500">
-        
-        <img src="https://www.digitaltrends.com/tachyon/2024/08/model-y-juniper-1.jpg?resize=1200%2C720" 
-             class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"/>
+                    <div class="flex justify-between items-center mt-4">
+                      <span class="text-yellow-400">⭐⭐⭐⭐⭐</span>
+                      <span class="font-bold text-black">
+                        ${data.rentPricePerDay}/day
+                      </span>
+                    </div>
 
-        <div class="p-5">
-          <h3 class="text-xl text-black font-semibold">Tesla Model S</h3>
-          <p class="text-sm text-black">Electric • Premium</p>
-
-          <div class="flex justify-between items-center mt-4">
-            <span class="text-yellow-400">⭐⭐⭐⭐⭐</span>
-            <span class="font-bold text-black">$120/day</span>
+                    <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 py-2 rounded-lg transition">
+                      Rent Now
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-
-          <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 py-2 rounded-lg transition">
-            Rent Now
-          </button>
-        </div>
-      </div>
-      <div class="group backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition duration-500">
-        
-        <img src="https://www.bmw-special-sales.com/content/dam/bmw/marketBMWCOM/bmw-special-sales_com/common/protection/7-protection/bmw-css-7-series-protection-ms-new-standard.jpg" 
-             class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"/>
-
-        <div class="p-5">
-          <h3 class="text-xl text-black font-semibold">BMW 7</h3>
-          <p class="text-sm text-black">High performance</p>
-
-          <div class="flex justify-between items-center mt-4">
-            <span class="text-yellow-400">⭐⭐⭐⭐⭐</span>
-            <span class="font-bold text-black">$100/day</span>
-          </div>
-
-          <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 py-2 rounded-lg transition">
-            Rent Now
-          </button>
-        </div>
-      </div>
-      <div class="group backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition duration-500">
-        
-        <img src="https://automodexpress.com/cdn/shop/files/ROBOTcraftsmanAlerionHyperionwidebodykitaftermarketbumperlipdiffuserwinghoodcarbonfibersideskirtsperformancetuning_10_1000x.jpg?v=1715296328" 
-             class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"/>
-
-        <div class="p-5">
-          <h3 class="text-xl text-black font-semibold">Supra MK5</h3>
-          <p class="text-sm text-black"> rear-wheel-drive sports car</p>
-
-          <div class="flex justify-between items-center mt-4">
-            <span class="text-yellow-400">⭐⭐⭐⭐⭐</span>
-            <span class="font-bold text-black">$220/day</span>
-          </div>
-
-          <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 py-2 rounded-lg transition">
-            Rent Now
-          </button>
-        </div>
-      </div>
-
-    
-      
-
-  
-
-
-    </div>
-  </div>
-</section>
+        </section>
       </div>
       <div>
         <section class="py-16 bg-gray-100">
@@ -211,7 +180,6 @@ const Home = () => {
           </div>
         </section>
       </div>
-
     </div>
   );
 };

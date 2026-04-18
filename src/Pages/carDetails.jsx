@@ -1,12 +1,17 @@
-import React from "react";
+import React, { use, useState } from "react";
 import { useLoaderData, useParams } from "react-router";
+import AuthContext from "../Provider/AuthContext";
+import { toast } from "react-toastify";
 
 const CarDetails = () => {
   const { id } = useParams();
   const datas = useLoaderData();
+  const {user}=use(AuthContext);
+
 
   const car = datas.find((data) => data._id === id);
   console.log(car);
+    const [carState, setCar] = useState(car);
 
   if (!car) {
     return (
@@ -16,8 +21,42 @@ const CarDetails = () => {
     );
   }
 
- 
+const handleBooking = async (car) => {
+  const bookingData = {
+    carId: car._id,
+    carName: car.carName,
+    price: car.rentPricePerDay,
+    userEmail: user?.email,
+    userName: user?.displayName,
+    status: "Booked",
+    bookingDate: new Date(),
+  };
 
+
+  const res = await fetch("http://localhost:3000/bookings", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bookingData),
+    
+  });
+  const data = await res.json();
+
+   if (data.success) {
+    setCar((prev) => ({
+      ...prev,
+      status: "Booked",
+    }));
+    toast("Car is booked successful");
+  }
+
+  console.log(bookingData);
+  console.log(data);
+};
+
+ 
+console.log(car._id);
   return (
     <div className="min-h-screen pt-20 bg-base-200 flex items-center justify-center p-4">
       <div className="card w-full max-w-5xl bg-base-100 shadow-2xl rounded-2xl overflow-hidden">
@@ -49,12 +88,12 @@ const CarDetails = () => {
               <p>
                 <span className="font-semibold">Status:</span>{" "}
                 <span className={`badge ${car.status === "Available" ? "badge-success" : "badge-error"}`}>
-                  {car.status}
+                  {carState.status}
                 </span>
               </p>
             </div>
 
-            <button className="btn btn-primary mt-6 w-full md:w-auto">
+            <button onClick={()=>handleBooking(car)} className="btn btn-primary mt-6 w-full md:w-auto">
               Book Now
             </button>
           </div>
