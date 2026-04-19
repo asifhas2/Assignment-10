@@ -1,5 +1,5 @@
-import axios from "axios";
-import React, { use, useEffect } from "react";
+
+import React, { use,  } from "react";
 import Swal from "sweetalert2";
 import AuthContext from "../Provider/AuthContext";
 
@@ -9,18 +9,19 @@ const AddCart = () => {
     e.preventDefault();
 
     const form = e.target;
-
+ console.log(Number(form.carPrice.value)) 
     const addCarData = {
       carName: form.carName.value,
       description: form.description.value,
       category: form.carCategory.value,
       image: form.carPhoto.value,
       location: form.carLocation.value,
-      rentPrice: Number(form.carPrice.value),
+      rentPrice: form.carPrice.value,
       providerName: form.name.value,
       providerEmail: form.email.value,
+      status:"available"
     };
-    fetch("http://localhost:3000/addCar", {
+    fetch("http://localhost:3000/cars", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -59,6 +60,7 @@ const AddCart = () => {
                 <span class="label-text font-semibold">Car Name</span>
               </label>
               <input
+              required
                 type="text"
                 name="carName"
                 placeholder="e.g. Toyota Corolla"
@@ -71,6 +73,7 @@ const AddCart = () => {
                 <span class="label-text font-semibold">Image URL</span>
               </label>
               <input
+              required
                 name="carPhoto"
                 type="text"
                 placeholder="https://source.unsplash.com/..."
@@ -82,7 +85,7 @@ const AddCart = () => {
               <label class="label">
                 <span class="label-text font-semibold">Category</span>
               </label>
-              <select name="carCategory" class="select select-bordered w-full">
+              <select required name="carCategory" class="select select-bordered w-full">
                 <option>Sedan</option>
                 <option>SUV</option>
                 <option>Hatchback</option>
@@ -98,6 +101,7 @@ const AddCart = () => {
                 </span>
               </label>
               <input
+              required
                 type="number"
                 name="carPrice"
                 placeholder="e.g. 2000"
@@ -110,6 +114,7 @@ const AddCart = () => {
                 <span class="label-text font-semibold">Location</span>
               </label>
               <input
+              required
                 type="text"
                 name="carLocation"
                 placeholder="e.g. Dhaka,Bangladesh"
@@ -133,6 +138,7 @@ const AddCart = () => {
                 <span class="label-text font-semibold">Provider Email</span>
               </label>
               <input
+              required
                 name="email"
                 type="text"
                 defaultValue={user?.email}

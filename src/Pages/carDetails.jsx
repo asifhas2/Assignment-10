@@ -66,7 +66,7 @@ console.log(car._id);
           <img
             src={car.image}
             alt={car.carName}
-            className="w-full h-full object-cover"
+            className=" object-cover "
           />
         </figure>
 
@@ -94,7 +94,7 @@ console.log(car._id);
               </p>
             </div>
 
-            <button onClick={()=>handleBooking(car)} className="btn btn-primary mt-6 w-full md:w-auto">
+            <button disabled={car.status === 'Booked'} onClick={()=>handleBooking(car)} className="btn btn-primary mt-6 w-full md:w-auto">
               Book Now
             </button>
           </div>

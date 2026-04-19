@@ -20,7 +20,7 @@ const Home = () => {
     <div className="pt-10 bg-base-200">
       <Slider></Slider>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
-        {carsData.map((data) => (
+        {carsData.slice(0,6).map((data) => (
           <Card data={data}></Card>
         ))}
       </div>
