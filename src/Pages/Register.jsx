@@ -12,7 +12,7 @@ const Register = () => {
       .then((result) => {
         console.log(result.user);
         Swal.fire({
-          title: "Good job!",
+          title: "Login successful!",
           text: "You clicked the button!",
           icon: "success",
         });

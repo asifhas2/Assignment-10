@@ -1,5 +1,6 @@
 import React, { use, useEffect, useState } from "react";
 import AuthContext from "../Provider/AuthContext";
+import Swal from "sweetalert2";
 
 const MyListing = () => {
   const { user } = use(AuthContext);
@@ -15,15 +16,43 @@ const MyListing = () => {
       .then((data) => setListing(data));
   }, [user, email]);
 
-  
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This car will be permanently deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/cars/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("Deleted:", data);
+
+            setListing((prev) => prev.filter((car) => car._id !== id));
+
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your car has been deleted.",
+              icon: "success",
+              timer: 2000,
+              showConfirmButton: false,
+            });
+          });
+      }
+    });
+  };
 
   return (
     <div className="py-15">
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
-          <h2 className="card-title text-2xl font-bold">
-            My Cars 
-          </h2>
+          <h2 className="card-title text-2xl font-bold">My Cars</h2>
           <div className="overflow-x-auto mt-4">
             <table className="table table-zebra w-full">
               <thead className="bg-base-200 text-base-content">
@@ -41,7 +70,7 @@ const MyListing = () => {
                   <tr key={car._id}>
                     <td>{car.carName}</td>
                     <td>{car.category}</td>
-                    <td>${car.rentPricePerDay} / day</td>
+                    <td>${car.rentPrice} / day</td>
                     <td>
                       <span className="badge badge-success">{car.status}</span>
                     </td>
@@ -54,7 +83,12 @@ const MyListing = () => {
                         Update
                       </button>
 
-                      <button className="btn btn-sm btn-error">Delete</button>
+                      <button
+                        onClick={() => handleDelete(car._id)}
+                        className="btn btn-sm btn-error"
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -75,7 +109,6 @@ const MyListing = () => {
 
                     const updatedCar = {
                       carName: form.carName.value,
-                      description: form.description.value,
                       category: form.category.value,
                       rentPricePerDay: form.rentPricePerDay.value,
                       location: form.location.value,
@@ -102,7 +135,11 @@ const MyListing = () => {
                         );
 
                         setSelectedCar(null);
-                        alert("Car updated successfully!");
+                        Swal.fire({
+                          title: "Car update successful!",
+                          text: "You clicked the button!",
+                          icon: "success",
+                        });
                       });
                   }}
                   className="space-y-2"
