@@ -19,7 +19,7 @@ const MyBooking = () => {
       {booking.map((item) => (
         <div key={item._id} className="card bg-base-100 shadow-xl ">
           <figure>
-            <img src={item.carImage} />
+            <img className="h-[200px] " src={item.carImage} />
           </figure>
 
           <div className="card-body">

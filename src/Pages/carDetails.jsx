@@ -29,6 +29,7 @@ const handleBooking = async (car) => {
     price: car.rentPricePerDay,
     userEmail: user?.email,
     userName: user?.displayName,
+    type:"booking",
     status: "Booked",
     bookingDate: new Date(),
   };
