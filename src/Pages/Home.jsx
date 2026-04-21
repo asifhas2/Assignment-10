@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "../components/Slider";
 import Card from "../components/Card";
 import TopRatedCars from "../components/TopRatedCar";
-import { data, useLoaderData } from "react-router";
+import {  useLoaderData } from "react-router";
 
 const Home = () => {
   const carsData = useLoaderData();

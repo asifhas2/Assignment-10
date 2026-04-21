@@ -1,9 +1,10 @@
-import React, { use } from "react";
+import React, { use, useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import AuthContext from "../Provider/AuthContext";
 import Swal from "sweetalert2";
 
-const Navber = () => {
+const Navber = ({setSearch}) => {
+
   const { user, signOutUser } = use(AuthContext);
   console.log(user);
   const handelSignOut = () => {
@@ -56,6 +57,8 @@ const Navber = () => {
     </>
   );
 
+ 
+
   return (
     <div className="navbar bg-base-100 shadow-sm md:px-10 fixed top-0 left-0 w-full z-50 ">
       <div className="navbar-start">
@@ -96,6 +99,7 @@ const Navber = () => {
         <input
           type="text"
           placeholder="Search"
+          onChange={(e)=>setSearch(e.target.value)}
           className="input input-bordered w-24 md:w-auto"
         />
         {user && (
