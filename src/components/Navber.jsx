@@ -24,35 +24,40 @@ const Navber = ({setSearch}) => {
         });
       });
   };
+  const navClass = ({ isActive }) =>
+  isActive
+    ? "text-primary font-semibold underline"
+    : "text-base-content";
 
   const links = (
+    
     <>
       <li className="font-semibold">
-        <NavLink to="/">Home</NavLink>
+        <NavLink className={navClass} to="/">Home</NavLink>
       </li>
       <li className="font-semibold ">
-        <NavLink to="/addCar">Add-Car</NavLink>
+        <NavLink  className={navClass} to="/addCar">Add-Car</NavLink>
       </li>
       <li className="font-semibold ">
-        <NavLink to="/myListing">My-Listings</NavLink>
+        <NavLink  className={navClass} to="/myListing">My-Listings</NavLink>
       </li>
       <li className="font-semibold ">
-        <NavLink to="/myBooking">My-Bookings</NavLink>
+        <NavLink  className={navClass} to="/myBooking">My-Bookings</NavLink>
       </li>
       <li className="font-semibold ">
-        <NavLink to="/browsCars">Browse-Cars</NavLink>
+        <NavLink  className={navClass} to="/browsCars">Browse-Cars</NavLink>
       </li>
       {user ? (
         <li className="font-semibold hidden">
-          <NavLink to="/login">Login</NavLink>
+          <NavLink  className={navClass} to="/login">Login</NavLink>
         </li>
       ) : (
         <li className="font-semibold">
-          <NavLink to="/login">Login</NavLink>
+          <NavLink  className={navClass} to="/login">Login</NavLink>
         </li>
       )}
       <li className="font-semibold ">
-        <NavLink to="/register">Register</NavLink>
+        <NavLink  className={navClass} to="/register">Register</NavLink>
       </li>
     </>
   );
