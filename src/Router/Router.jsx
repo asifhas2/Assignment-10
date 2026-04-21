@@ -17,57 +17,76 @@ const router = createBrowserRouter([
     path: "/",
     Component: Root,
     children: [
-        {
-          index:true,
-          loader:()=>fetch('http://localhost:3000/cars'),
-          hydrateFallbackElement: (
-<div className="flex items-center justify-center min-h-screen">
-  <span className="loading loading-spinner loading-lg text-info"></span>
-</div>),
-          Component:Home,  
-        },
-        {
-            path:'/addCar',
-            element:<PrivateRoute><AddCart></AddCart></PrivateRoute>
-        },
-        {
-            path:'/myListing',
-            element:<PrivateRoute><MyListing></MyListing></PrivateRoute>
-        },
-        {
-            path:'/myBooking',
-            element:<PrivateRoute><MyBooking></MyBooking></PrivateRoute>
-        },
-        {
-            path:'/details/:id',
-            loader:()=>fetch('http://localhost:3000/cars'),
-             hydrateFallbackElement: (
-<div className="flex items-center justify-center min-h-screen">
-  <span className="loading loading-spinner loading-lg text-info"></span>
-</div>),
-            element:<PrivateRoute><CarDetails></CarDetails></PrivateRoute>
-        },
-        {
-            path:'/browsCars',
-             loader:()=>fetch('http://localhost:3000/cars'),
-             hydrateFallbackElement: (
-<div className="flex items-center justify-center min-h-screen">
-  <span className="loading loading-spinner loading-lg text-info"></span>
-</div>),
-            element:<BrowseCars></BrowseCars>
-        },
-        {
-            path:'/login',
-            element:<Login></Login>
-        },
-        {
-            path:'/register',
-            element:<Register></Register>
-        },
-        {
-            path:'*',
-            element:<NotFound></NotFound>
-        }
+      {
+        index: true,
+        loader: () => fetch("https://smart-car-ren-server.vercel.app/cars"),
+        hydrateFallbackElement: (
+          <div className="flex items-center justify-center min-h-screen">
+            <span className="loading loading-spinner loading-lg text-info"></span>
+          </div>
+        ),
+        Component: Home,
+      },
+      {
+        path: "/addCar",
+        element: (
+          <PrivateRoute>
+            <AddCart></AddCart>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/myListing",
+        element: (
+          <PrivateRoute>
+            <MyListing></MyListing>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/myBooking",
+        element: (
+          <PrivateRoute>
+            <MyBooking></MyBooking>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/details/:id",
+        loader: () => fetch("https://smart-car-ren-server.vercel.app/cars"),
+        hydrateFallbackElement: (
+          <div className="flex items-center justify-center min-h-screen">
+            <span className="loading loading-spinner loading-lg text-info"></span>
+          </div>
+        ),
+        element: (
+          <PrivateRoute>
+            <CarDetails></CarDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/browsCars",
+        loader: () => fetch("https://smart-car-ren-server.vercel.app/cars"),
+        hydrateFallbackElement: (
+          <div className="flex items-center justify-center min-h-screen">
+            <span className="loading loading-spinner loading-lg text-info"></span>
+          </div>
+        ),
+        element: <BrowseCars></BrowseCars>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+      {
+        path: "*",
+        element: <NotFound></NotFound>,
+      },
     ],
   },
 ]);

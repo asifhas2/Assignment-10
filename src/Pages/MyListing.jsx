@@ -11,7 +11,7 @@ const MyListing = () => {
   useEffect(() => {
     if (!email) return;
 
-    fetch(`http://localhost:3000/cars?email=${email}`)
+    fetch(`https://smart-car-ren-server.vercel.app/cars?email=${email}`)
       .then((res) => res.json())
       .then((data) => setListing(data));
   }, [user, email]);
@@ -27,7 +27,7 @@ const MyListing = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/cars/${id}`, {
+        fetch(`https://smart-car-ren-server.vercel.app/cars/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -116,13 +116,16 @@ const MyListing = () => {
                       status: form.status.value,
                     };
 
-                    fetch(`http://localhost:3000/cars/${selectedCar._id}`, {
-                      method: "PATCH",
-                      headers: {
-                        "Content-Type": "application/json",
+                    fetch(
+                      `https://smart-car-ren-server.vercel.app/cars/${selectedCar._id}`,
+                      {
+                        method: "PATCH",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(updatedCar),
                       },
-                      body: JSON.stringify(updatedCar),
-                    })
+                    )
                       .then((res) => res.json())
                       .then((data) => {
                         console.log("Updated:", data);

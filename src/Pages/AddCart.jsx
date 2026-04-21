@@ -1,15 +1,14 @@
-
-import React, { use,  } from "react";
+import React, { use } from "react";
 import Swal from "sweetalert2";
 import AuthContext from "../Provider/AuthContext";
 
 const AddCart = () => {
-    const {user}=use(AuthContext);
+  const { user } = use(AuthContext);
   const handelAddCard = async (e) => {
     e.preventDefault();
 
     const form = e.target;
- console.log(Number(form.carPrice.value)) 
+    console.log(Number(form.carPrice.value));
     const addCarData = {
       carName: form.carName.value,
       description: form.description.value,
@@ -19,9 +18,9 @@ const AddCart = () => {
       rentPrice: form.carPrice.value,
       providerName: form.name.value,
       providerEmail: form.email.value,
-      status:"available"
+      status: "available",
     };
-    fetch("http://localhost:3000/cars", {
+    fetch("https://smart-car-ren-server.vercel.app/cars", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,13 +30,12 @@ const AddCart = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {
-            form.reset();
+          form.reset();
           Swal.fire({
             icon: "success",
             title: "Add car successful",
-            text:"Add car successful" ,
+            text: "Add car successful",
           });
-
         }
         console.log(data);
       });
@@ -60,7 +58,7 @@ const AddCart = () => {
                 <span class="label-text font-semibold">Car Name</span>
               </label>
               <input
-              required
+                required
                 type="text"
                 name="carName"
                 placeholder="e.g. Toyota Corolla"
@@ -73,7 +71,7 @@ const AddCart = () => {
                 <span class="label-text font-semibold">Image URL</span>
               </label>
               <input
-              required
+                required
                 name="carPhoto"
                 type="text"
                 placeholder="https://source.unsplash.com/..."
@@ -85,7 +83,11 @@ const AddCart = () => {
               <label class="label">
                 <span class="label-text font-semibold">Category</span>
               </label>
-              <select required name="carCategory" class="select select-bordered w-full">
+              <select
+                required
+                name="carCategory"
+                class="select select-bordered w-full"
+              >
                 <option>Sedan</option>
                 <option>SUV</option>
                 <option>Hatchback</option>
@@ -101,7 +103,7 @@ const AddCart = () => {
                 </span>
               </label>
               <input
-              required
+                required
                 type="number"
                 name="carPrice"
                 placeholder="e.g. 2000"
@@ -114,7 +116,7 @@ const AddCart = () => {
                 <span class="label-text font-semibold">Location</span>
               </label>
               <input
-              required
+                required
                 type="text"
                 name="carLocation"
                 placeholder="e.g. Dhaka,Bangladesh"
@@ -138,7 +140,7 @@ const AddCart = () => {
                 <span class="label-text font-semibold">Provider Email</span>
               </label>
               <input
-              required
+                required
                 name="email"
                 type="text"
                 defaultValue={user?.email}

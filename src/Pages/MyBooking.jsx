@@ -8,7 +8,9 @@ const MyBooking = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:3000/bookings?email=${user.email}`)
+    fetch(
+      `https://smart-car-ren-server.vercel.app/bookings?email=${user.email}`,
+    )
       .then((res) => res.json())
       .then((data) => setBooking(data));
   }, [user]);

@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import Slider from "../components/Slider";
 import Card from "../components/Card";
 import TopRatedCars from "../components/TopRatedCar";
-import {  useLoaderData } from "react-router";
+import { useLoaderData } from "react-router";
 
 const Home = () => {
   const carsData = useLoaderData();
   const [topCar, setTopCar] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/topCars")
+    fetch("https://smart-car-ren-server.vercel.app/topCars")
       .then((res) => res.json())
       .then((data) => setTopCar(data));
   }, []);
@@ -20,7 +20,7 @@ const Home = () => {
     <div className="pt-10 bg-base-200">
       <Slider></Slider>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
-        {carsData.slice(0,6).map((data) => (
+        {carsData.slice(0, 6).map((data) => (
           <Card data={data}></Card>
         ))}
       </div>
