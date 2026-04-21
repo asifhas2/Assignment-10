@@ -20,6 +20,10 @@ const router = createBrowserRouter([
         {
           index:true,
           loader:()=>fetch('http://localhost:3000/cars'),
+          hydrateFallbackElement: (
+<div className="flex items-center justify-center min-h-screen">
+  <span className="loading loading-spinner loading-lg text-info"></span>
+</div>),
           Component:Home,  
         },
         {
@@ -37,11 +41,19 @@ const router = createBrowserRouter([
         {
             path:'/details/:id',
             loader:()=>fetch('http://localhost:3000/cars'),
+             hydrateFallbackElement: (
+<div className="flex items-center justify-center min-h-screen">
+  <span className="loading loading-spinner loading-lg text-info"></span>
+</div>),
             element:<PrivateRoute><CarDetails></CarDetails></PrivateRoute>
         },
         {
             path:'/browsCars',
              loader:()=>fetch('http://localhost:3000/cars'),
+             hydrateFallbackElement: (
+<div className="flex items-center justify-center min-h-screen">
+  <span className="loading loading-spinner loading-lg text-info"></span>
+</div>),
             element:<BrowseCars></BrowseCars>
         },
         {
