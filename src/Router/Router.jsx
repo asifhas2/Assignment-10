@@ -10,6 +10,7 @@ import Register from "../Pages/Register";
 import PrivateRoute from "./PrivateRoute";
 import BrowseCars from "../Pages/BrowseCars";
 import CarDetails from "../Pages/carDetails";
+import NotFound from "../components/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
             path:'/register',
             element:<Register></Register>
         },
+        {
+            path:'*',
+            element:<NotFound></NotFound>
+        }
     ],
   },
 ]);
